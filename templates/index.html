@@ -196,7 +196,7 @@
             </p>
         </footer>
     </div>
-
+WW
     <script>
         let colors = ['#FF0080', '#00FF80'];
         let currentGradient = [];
@@ -206,8 +206,9 @@
         document.addEventListener('DOMContentLoaded', function() {
             initializeColorInputs();
             //loadColorSchemes();
-            updatePreview();
             
+            updatePreview();
+            handleTextInput(null)
             // Event listeners
             document.getElementById('textInput').addEventListener('input', handleTextInput);
             document.getElementById('addColorBtn').addEventListener('click', addColor);
@@ -215,12 +216,13 @@
         });
 
         function handleTextInput(e) {
-            const text = e.target.value;
-            const charCount = text.length;
-            document.getElementById('charCount').textContent = `${charCount}/8`;
-            document.getElementById('charCount').className = `font-mono ${charCount >= 8 ? 'text-yellow-400' : 'text-blue-400'}`;
-            updatePreview();
-        }
+    const text = e?.target?.value ?? ""; // Wenn e null oder undefined ist, wird "" verwendet
+    const charCount = text.length;
+    document.getElementById('charCount').textContent = `${charCount}/8`;
+    document.getElementById('charCount').className = `font-mono ${charCount >= 8 ? 'text-yellow-400' : 'text-blue-400'}`;
+    updatePreview();
+}
+
 
         function initializeColorInputs() {
             const container = document.getElementById('colorInputs');
