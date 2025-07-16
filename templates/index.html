@@ -7,7 +7,7 @@
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon" />
     <title>GradientGenerator</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
@@ -206,7 +206,7 @@
         </footer>
     </div>
 
-    <script src="../static/script.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 
 </html>
