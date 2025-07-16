@@ -133,7 +133,7 @@ def generate_gradient():
         return jsonify({'error': 'At least 2 valid hex colors required'}), 400
     
     # Limit text length
-    if len(text) > 10:
+    if len(text) > 8:
         text = text[:10]
     
     gradient_result = ColorUtils.generate_gradient(text, valid_colors)

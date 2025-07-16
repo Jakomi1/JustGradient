@@ -1,18 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Color Gradient Text Generator</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon" />
+    <title>GradientGenerator</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {}
-            }
-        }
-    </script>
+    <link rel="stylesheet" href="../static/style.css">
 </head>
+
 <body class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
     <div class="container mx-auto px-4 py-8">
         <!-- Header -->
@@ -20,44 +17,45 @@
             <div class="flex items-center justify-center space-x-3 mb-4">
                 <div class="p-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl">
                     <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3l14 9-14 9V3z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3l14 9-14 9V3z">
+                        </path>
                     </svg>
                 </div>
-                <h1 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
-                    Color Gradient Text Generator
+                <h1
+                    class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+                    Gradient Generator
                 </h1>
             </div>
             <p class="text-xl text-gray-300 max-w-2xl mx-auto">
                 Transform your text into beautiful color gradients with smooth RGB interpolation
             </p>
         </header>
-        
+
         <!-- Main Content -->
         <div class="max-w-6xl mx-auto space-y-8">
             <!-- Input Section -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div class="space-y-6">
                     <!-- Text Input -->
-                    <div class="bg-gray-800 rounded-xl p-6 border border-gray-700 hover:border-gray-600 transition-all duration-200">
+                    <div
+                        class="bg-gray-800 rounded-xl p-6 border border-gray-700 hover:border-gray-600 transition-all duration-200">
                         <div class="flex items-center space-x-3 mb-4">
                             <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6h16M4 12h16M4 18h7"></path>
                             </svg>
                             <h3 class="text-xl font-semibold text-white">Text Input</h3>
                         </div>
-                        
+
                         <div class="space-y-3">
                             <div class="relative">
-                                <input
-                                    type="text"
-                                    id="textInput"
-                                    placeholder="Enter your text..."
-                                    maxlength="8"
+                                <input type="text" id="textInput" placeholder="Enter your text..." maxlength="8"
+                                    onkeydown="if (event.key === ' ') event.preventDefault();"
                                     class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 text-lg"
-                                    value=""
-                                />
+                                    value="" />
+
                             </div>
-                            
+
                             <div class="flex justify-between items-center text-sm">
                                 <span class="text-gray-400">
                                     Characters: <span id="charCount" class="font-mono text-blue-400"></span>
@@ -65,32 +63,34 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Color Manager -->
                     <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
                         <div class="flex items-center justify-between mb-4">
                             <div class="flex items-center space-x-3">
-                                <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM7 3H5a2 2 0 00-2 2v12a4 4 0 004 4h2a2 2 0 002-2V5a2 2 0 00-2-2z"></path>
+                                <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM7 3H5a2 2 0 00-2 2v12a4 4 0 004 4h2a2 2 0 002-2V5a2 2 0 00-2-2z">
+                                    </path>
                                 </svg>
                                 <h3 class="text-xl font-semibold text-white">Color Palette</h3>
                             </div>
-                            
-                            <button
-                                id="addColorBtn"
-                                class="flex items-center space-x-2 px-3 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-all duration-200 font-medium"
-                            >
+
+                            <button id="addColorBtn"
+                                class="flex items-center space-x-2 px-3 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-all duration-200 font-medium">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 4v16m8-8H4"></path>
                                 </svg>
                                 <span>Add Color</span>
                             </button>
                         </div>
-                        
+
                         <div id="colorInputs" class="space-y-3">
                             <!-- Color inputs will be dynamically generated -->
                         </div>
-                        
+
                         <div class="mt-4 p-3 bg-gray-700 rounded-lg border border-gray-600">
                             <div class="flex items-center space-x-2 mb-2">
                                 <span class="text-sm font-medium text-gray-300">Gradient Preview:</span>
@@ -99,40 +99,45 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="space-y-6">
                     <!-- Gradient Preview -->
                     <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
                         <div class="flex items-center justify-between mb-4">
                             <div class="flex items-center space-x-3">
-                                <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                    </path>
                                 </svg>
                                 <h3 class="text-xl font-semibold text-white">Live Preview</h3>
                             </div>
-                            
-                            <button
-                                id="copyBtn"
-                                class="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all duration-200 font-medium"
-                            >
+
+                            <button id="copyBtn"
+                                class="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all duration-200 font-medium">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z">
+                                    </path>
                                 </svg>
                                 <span>Copy Gradient</span>
                             </button>
                         </div>
-                        
+
                         <div class="space-y-4">
                             <div class="p-6 bg-gray-900 rounded-lg border border-gray-600">
                                 <div id="textPreview" class="text-4xl font-bold text-center break-all leading-relaxed">
                                     <!-- Preview will be generated here -->
                                 </div>
                             </div>
-                            
+
                             <div class="p-4 bg-gray-900 rounded-lg border border-gray-600 overflow-x-auto">
                                 <div class="text-sm text-gray-300 mb-2 font-medium">Gradient Code:</div>
-                                <code id="htmlCode" class="text-xs text-green-400 font-mono break-all whitespace-pre-wrap">
+                                <code id="htmlCode"
+                                    class="text-xs text-green-400 font-mono break-all whitespace-pre-wrap">
                                     <!-- HTML code will be shown here -->
                                 </code>
                             </div>
@@ -140,7 +145,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Color Schemes -->
             <!--<div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
                 <div class="flex items-center space-x-3 mb-4">
@@ -154,33 +159,37 @@
                 
                 </div>
             </div>-->
-            
+
             <!-- Features -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
                 <div class="bg-gray-800 rounded-xl p-6 border border-gray-700 text-center">
                     <div class="w-12 h-12 bg-blue-500 rounded-lg mx-auto mb-4 flex items-center justify-center">
                         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3l14 9-14 9V3z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3l14 9-14 9V3z">
+                            </path>
                         </svg>
                     </div>
                     <h3 class="text-lg font-semibold text-white mb-2">Live Preview</h3>
                     <p class="text-gray-400">See your gradient text in real-time as you type and adjust colors</p>
                 </div>
-                
+
                 <div class="bg-gray-800 rounded-xl p-6 border border-gray-700 text-center">
                     <div class="w-12 h-12 bg-green-500 rounded-lg mx-auto mb-4 flex items-center justify-center">
                         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
                         </svg>
                     </div>
                     <h3 class="text-lg font-semibold text-white mb-2">Export Ready</h3>
                     <p class="text-gray-400">Copy clean Gradient code</p>
                 </div>
-                
+
                 <div class="bg-gray-800 rounded-xl p-6 border border-gray-700 text-center">
                     <div class="w-12 h-12 bg-purple-500 rounded-lg mx-auto mb-4 flex items-center justify-center">
                         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
+                            </path>
                         </svg>
                     </div>
                     <h3 class="text-lg font-semibold text-white mb-2">Accessible</h3>
@@ -188,7 +197,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Footer -->
         <footer class="text-center mt-16 pt-8 border-t border-gray-700">
             <p class="text-gray-400">
@@ -196,283 +205,8 @@
             </p>
         </footer>
     </div>
-WW
-    <script>
-        let colors = ['#FF0080', '#00FF80'];
-        let currentGradient = [];
-        let currentHtml = '';
 
-        // Initialize the app
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeColorInputs();
-            //loadColorSchemes();
-            
-            updatePreview();
-            handleTextInput(null)
-            // Event listeners
-            document.getElementById('textInput').addEventListener('input', handleTextInput);
-            document.getElementById('addColorBtn').addEventListener('click', addColor);
-            document.getElementById('copyBtn').addEventListener('click', copyHtml);
-        });
-
-        function handleTextInput(e) {
-    const text = e?.target?.value ?? ""; // Wenn e null oder undefined ist, wird "" verwendet
-    const charCount = text.length;
-    document.getElementById('charCount').textContent = `${charCount}/8`;
-    document.getElementById('charCount').className = `font-mono ${charCount >= 8 ? 'text-yellow-400' : 'text-blue-400'}`;
-    updatePreview();
-}
-
-
-        function initializeColorInputs() {
-            const container = document.getElementById('colorInputs');
-            container.innerHTML = '';
-            
-            colors.forEach((color, index) => {
-                const colorInput = createColorInput(color, index);
-                container.appendChild(colorInput);
-            });
-            
-            updateGradientPreview();
-        }
-
-        function createColorInput(color, index) {
-            const div = document.createElement('div');
-            div.className = 'relative group';
-            div.innerHTML = `
-                <div class="flex items-center space-x-3 bg-gray-800 rounded-xl p-4 border border-gray-700 hover:border-gray-600 transition-all duration-200">
-                    <div class="flex items-center space-x-3 flex-1">
-                        <div class="relative">
-                            <input
-                                type="color"
-                                value="${color}"
-                                onchange="updateColor(${index}, this.value)"
-                                class="w-12 h-12 rounded-lg border-2 border-gray-600 hover:border-gray-500 transition-colors cursor-pointer"
-                                style="background-color: ${color}"
-                            />
-                        </div>
-                        
-                        <div class="flex-1">
-                            <label class="block text-sm font-medium text-gray-300 mb-1">
-                                Color ${index + 1}
-                            </label>
-                            <input
-                                type="text"
-                                value="${color}"
-                                onchange="updateColor(${index}, this.value)"
-                                oninput="validateHexInput(this, ${index})"
-                                placeholder="#FF0000"
-                                class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
-                                maxlength="7"
-                            />
-                        </div>
-                    </div>
-                    
-                    ${colors.length > 2 ? `
-                        <button
-                            onclick="removeColor(${index})"
-                            class="p-2 text-gray-400 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all duration-200"
-                            aria-label="Remove color"
-                        >
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                            </svg>
-                        </button>
-                    ` : ''}
-                </div>
-            `;
-            return div;
-        }
-
-        function updateColor(index, value) {
-            if (isValidHex(value)) {
-                colors[index] = value.toUpperCase();
-                updateGradientPreview();
-                updatePreview();
-            }
-        }
-
-        function validateHexInput(input, index) {
-            const value = input.value.toUpperCase();
-            input.value = value;
-            
-            if (isValidHex(value)) {
-                input.classList.remove('border-red-500');
-                input.classList.add('border-gray-600');
-                updateColor(index, value);
-            } else {
-                input.classList.remove('border-gray-600');
-                input.classList.add('border-red-500');
-            }
-        }
-
-        function addColor() {
-            const newColor = '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0').toUpperCase();
-            colors.push(newColor);
-            initializeColorInputs();
-            updatePreview();
-        }
-
-        function removeColor(index) {
-            if (colors.length > 2) {
-                colors.splice(index, 1);
-                initializeColorInputs();
-                updatePreview();
-            }
-        }
-
-        function updateGradientPreview() {
-            const preview = document.getElementById('gradientPreview');
-            preview.style.background = `linear-gradient(to right, ${colors.join(', ')})`;
-        }
-
-        function isValidHex(hex) {
-            return /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(hex);
-        }
-
-        async function updatePreview() {
-            const text = document.getElementById('textInput').value;
-            
-            if (!text) {
-                document.getElementById('textPreview').innerHTML = '';
-                document.getElementById('htmlCode').textContent = '';
-                return;
-            }
-
-            try {
-                const response = await fetch('/api/generate-gradient', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        text: text,
-                        colors: colors
-                    })
-                });
-
-                const data = await response.json();
-                currentGradient = data.gradient;
-                currentHtml = data.html;
-
-                // Update preview
-                const previewHtml = data.gradient.map(item => 
-                    `<span style="color:${item.color}" class="transition-all duration-300 hover:scale-110 inline-block">${item.character}</span>`
-                ).join('');
-                const previewData = data.gradient.map(item => 
-                    `<${item.color}>${item.character}`
-                ).join('\n');
-                document.getElementById('textPreview').innerHTML = previewHtml;
-                document.getElementById('htmlCode').textContent = previewData;
-            } catch (error) {
-                console.error('Error generating gradient:', error);
-            }
-        }
-
-        /*async function loadColorSchemes() {
-            try {
-                const response = await fetch('/api/schemes');
-                const schemes = await response.json();
-                
-                const container = document.getElementById('colorSchemes');
-                container.innerHTML = '';
-                
-                schemes.forEach(scheme => {
-                    const schemeElement = createSchemeElement(scheme);
-                    container.appendChild(schemeElement);
-                });
-            } catch (error) {
-                console.error('Error loading color schemes:', error);
-            }
-        }*/
-
-        /*function createSchemeElement(scheme) {
-            const button = document.createElement('button');
-            button.className = 'p-4 bg-gray-700 hover:bg-gray-600 rounded-lg border border-gray-600 hover:border-gray-500 transition-all duration-200 text-left group';
-            button.onclick = () => selectScheme(scheme);
-            
-            const colorDots = scheme.colors.slice(0, 4).map(color => 
-                `<div class="w-4 h-4 rounded-full border border-gray-500" style="background-color: ${color}"></div>`
-            ).join('');
-            
-            const extraColors = scheme.colors.length > 4 ? 
-                `<div class="w-4 h-4 rounded-full bg-gray-500 flex items-center justify-center">
-                    <span class="text-xs text-white">+${scheme.colors.length - 4}</span>
-                </div>` : '';
-            
-            button.innerHTML = `
-                <div class="flex items-center space-x-3 mb-2">
-                    <div class="flex space-x-1">
-                        ${colorDots}
-                        ${extraColors}
-                    </div>
-                    <svg class="w-4 h-4 text-gray-400 group-hover:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4z"></path>
-                    </svg>
-                </div>
-                
-                <div class="space-y-1">
-                    <h4 class="font-medium text-white group-hover:text-blue-300 transition-colors">
-                        ${scheme.name}
-                    </h4>
-                    <p class="text-sm text-gray-400 group-hover:text-gray-300 transition-colors">
-                        ${scheme.description}
-                    </p>
-                </div>
-            `;
-            
-            return button;
-        }*/
-
-        /*function selectScheme(scheme) {
-            colors = [...scheme.colors];
-            initializeColorInputs();
-            updatePreview();
-        }*/
-
-        async function copyHtml() {
-    const htmlCodeElem = document.getElementById('htmlCode');
-    if (!htmlCodeElem || !htmlCodeElem.textContent) return;
-
-    const textToCopy = htmlCodeElem.textContent.replace(/\n/g,"");
-    const btn = document.getElementById('copyBtn');
-    const originalContent = btn.innerHTML;
-
-    try {
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-            await navigator.clipboard.writeText(textToCopy);
-        } else {
-            // Fallback: temporäres Textarea nutzen
-            const textarea = document.createElement('textarea');
-            textarea.value = textToCopy;
-            textarea.style.position = 'fixed';  // Verhindert Scrollen
-            textarea.style.opacity = '0';
-            document.body.appendChild(textarea);
-            textarea.focus();
-            textarea.select();
-
-            const successful = document.execCommand('copy');
-            document.body.removeChild(textarea);
-
-            if (!successful) throw new Error('Fallback: Copy command was unsuccessful');
-        }
-
-        btn.innerHTML = `
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span>Copied!</span>
-        `;
-
-        setTimeout(() => {
-            btn.innerHTML = originalContent;
-        }, 2000);
-
-    } catch (error) {
-        console.error('Failed to copy:', error);
-    }
-}
-
-    </script>
+    <script src="../static/script.js"></script>
 </body>
+
 </html>
